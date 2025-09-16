@@ -84,6 +84,7 @@ export const useGlobalStyles = createUseStyles((theme) => ({
 
     a: {
       textDecoration: "none",
+      color: 'inherit'
     },
 
     "button, input": {

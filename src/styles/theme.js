@@ -1,3 +1,5 @@
+const mq = (min) => `@media (min-width: ${min}px)`;
+
 export const theme = {
   colors: {
     black: "#000000",
@@ -17,10 +19,12 @@ export const theme = {
   //   xlarge: "32px",
   // },
   breakpoints: {
-    tablet: "800px",
-    desktop: "1280px",
+    tablet: "800",
+    desktop: "1280",
   },
   fonts: {
     main: "iranyekan, sans-serif",
   },
+
+  mq,
 };
