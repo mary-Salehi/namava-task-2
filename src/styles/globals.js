@@ -67,9 +67,21 @@ export const useGlobalStyles = createUseStyles((theme) => ({
 
     body: {
       backgroundColor: theme.colors.black,
+      color: theme.colors.white,
       lineHeight: "21px",
       direction: "rtl",
       fontFamily: theme.fonts.main,
+    },
+
+    '.container': {
+      margin: '0 auto',
+      padding: '24px 32px',
+      width: '100%',
+      height: '100vh',
+
+      [theme.mq(theme.breakpoints.desktop)]: {
+        padding: '24px 42px',
+      }
     },
 
     "*, *::before, *::after": {
@@ -88,9 +100,11 @@ export const useGlobalStyles = createUseStyles((theme) => ({
     },
 
     "button, input": {
+      fontFamily: theme.fonts.main,
       outline: "none",
       border: "none",
       background: "none",
+      appearance: 'none',
     },
   },
 }));
