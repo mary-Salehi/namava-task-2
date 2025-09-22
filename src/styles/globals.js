@@ -68,20 +68,28 @@ export const useGlobalStyles = createUseStyles((theme) => ({
     body: {
       backgroundColor: theme.colors.black,
       color: theme.colors.white,
-      lineHeight: "21px",
       direction: "rtl",
       fontFamily: theme.fonts.main,
-    },
-
-    '.container': {
-      margin: '0 auto',
-      padding: '24px 32px',
-      width: '100%',
-      height: '100vh',
+      lineHeight: '24px',
 
       [theme.mq(theme.breakpoints.desktop)]: {
-        padding: '24px 42px',
-      }
+        lineHeight: "28px",
+      },
+    },
+
+    ".container": {
+      margin: "0 auto",
+      padding: "24px 32px",
+      width: "100%",
+      height: "100vh",
+
+      [theme.mq(theme.breakpoints.desktop)]: {
+        padding: "24px 42px",
+      },
+    },
+
+    ".mainContent": {
+      display: 'grid'
     },
 
     "*, *::before, *::after": {
@@ -96,7 +104,7 @@ export const useGlobalStyles = createUseStyles((theme) => ({
 
     a: {
       textDecoration: "none",
-      color: 'inherit'
+      color: "inherit",
     },
 
     "button, input": {
@@ -104,7 +112,7 @@ export const useGlobalStyles = createUseStyles((theme) => ({
       outline: "none",
       border: "none",
       background: "none",
-      appearance: 'none',
+      appearance: "none",
     },
   },
 }));

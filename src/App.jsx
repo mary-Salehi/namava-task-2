@@ -1,6 +1,6 @@
 import { useGlobalStyles } from "./styles/globals";
 import Header from "./components/layout/header/Header";
-import Filters from "./components/filters/Filters";
+import BrowseSection from "./pages/browseSection/BrowseSection";
 
 function App() {
   useGlobalStyles();
@@ -9,7 +9,7 @@ function App() {
     <div>
       <Header />
       <main className="container">
-        <Filters />
+        <BrowseSection />
       </main>
     </div>
   );
