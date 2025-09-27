@@ -1,36 +1,59 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export const API_BASE = "https://www.namava.ir/api";
 
-export const useFetch = (url,queries) => {
+export const useFetch = (url, queries) => {
   const [data, setData] = useState([]);
+  const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [hasMore, setHasMore] = useState(true);
+
+  useEffect(() => {
+    setData([]);
+    setPage(1);
+    setHasMore(true);
+    setError(null);
+  }, [url, queries?.query, queries?.type]);
+
+  const loadMore = useCallback(() => {
+    if (!hasMore || isLoading) return;
+    setPage((prevPage) => prevPage + 1);
+  }, [hasMore, isLoading]);
 
   useEffect(() => {
     const controller = new AbortController();
 
     if (!queries.query) {
-      setData([]);
-      return;
+      return () => controller.abort();
     }
 
     async function fetchData() {
       try {
         setIsLoading(true);
-        setError(null)
+        setError(null);
 
         const response = await axios.get(`${API_BASE}/${url}`, {
-          params: queries,
+          params: {
+            ...queries,
+            page,
+            count: 20,
+          },
           signal: controller.signal,
         });
-        const movieItems =
+        const newItems =
           response.data.result?.result_items?.[0]?.groups?.Media?.items || [];
-        setData(movieItems);
+
+        setData((prev) => [...prev, ...newItems]);
+
+        if (newItems.length < 20) {
+          setHasMore(false);
+        }
       } catch (error) {
-        console.error("Error fetching data:", error);
-        setError(error)
+        if (error.name !== "AbortError") {
+          setError(error);
+        }
       } finally {
         setIsLoading(false);
       }
@@ -41,7 +64,7 @@ export const useFetch = (url,queries) => {
     return () => {
       controller.abort();
     };
-  }, [url,queries]);
+  }, [url, queries, page]);
 
-  return { isLoading, data, error };
+  return { data, isLoading, error, hasMore, loadMore };
 };
