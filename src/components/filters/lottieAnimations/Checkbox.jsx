@@ -1,6 +1,4 @@
-import checkboxAnimation from "/src/assets/lottie/Checkbox.json"; // Import your JSON file
-
-import React, { useRef } from "react";
+import React from "react";
 import { createUseStyles } from "react-jss";
 
 const useStyles = createUseStyles({
@@ -26,6 +24,7 @@ const useStyles = createUseStyles({
     padding: 0,
   },
 });
+
 
 const Checkbox = React.memo(({ label, id, toggle, checked }) => {
   const classes = useStyles();

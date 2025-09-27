@@ -7,10 +7,9 @@ import Checkbox from "./lottieAnimations/Checkbox";
 
 const useStyles = createUseStyles(filtersStyles);
 
-function Filters() {
+function Filters({checkedBoxes,setCheckedBoxes}) {
   const classes = useStyles();
   const [openAccordions, setOpenAccordions] = useState({});
-  const [checkedBoxes, setCheckedBoxes] = useState({});
 
   const toggleAccordion = useCallback((id) => {
     setOpenAccordions((prev) => ({
@@ -22,6 +21,8 @@ function Filters() {
   const toggleCheckbox = useCallback((id) => {
     setCheckedBoxes((prev) => {
       const updated = { ...prev, [id]: !prev[id] };
+      console.log(updated);
+      
       return updated;
     });
   }, []);
