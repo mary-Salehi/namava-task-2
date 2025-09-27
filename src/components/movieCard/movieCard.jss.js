@@ -8,19 +8,21 @@ export const movieCardStyles = {
 
   imageCard: {
     position: "relative",
-    width: "136px",
-    height: "200px",
     borderRadius: "4px",
     marginBottom: "8px",
-
-    [theme.mq(theme.breakpoints.desktop)]: {
-      width: "157px",
-      height: "231px",
-    },
+    overflow: 'hidden',
+    background: theme.colors.gray5,
+    aspectRatio: "2/3",
 
     "&:hover $overlay": {
       opacity: 1,
     },
+  },
+
+  movieImage: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
   },
 
   overlay: {
