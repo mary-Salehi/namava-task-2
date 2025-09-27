@@ -6,6 +6,10 @@ export const filtersStyles = {
     backgroundColor: theme.colors.gray5,
     borderRadius: "5px",
     width: "280px",
+    position : 'fixed',
+    top: '104px',
+    alignSelf: 'flex-start',
+    
 
     [theme.mq(theme.breakpoints.desktop)]: {
       width: "307px",

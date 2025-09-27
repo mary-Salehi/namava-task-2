@@ -49,7 +49,10 @@ function BrowseSection() {
     return params;
   }, [debouncedSearchQuery, type]);
 
-  const { data ,isLoading ,hasMore ,loadMore} = useFetch("v5.0/search/advance", queries);
+  const { data, isLoading, hasMore, loadMore } = useFetch(
+    "v5.0/search/advance",
+    queries
+  );
 
   useEffect(() => {
     if (debouncedSearchQuery) {
@@ -57,15 +60,14 @@ function BrowseSection() {
     } else {
       setSearchParams({});
     }
-  }, [queries, setSearchParams, debouncedSearchQuery ,type]);
+  }, [queries, setSearchParams, debouncedSearchQuery, type]);
 
   return (
     <div className={classes.browseContainer}>
-      <Filters
-        className={classes.filters}
-        checkedBoxes={checkedBoxes}
-        setCheckedBoxes={setCheckedBoxes}
-      />
+        <Filters
+          checkedBoxes={checkedBoxes}
+          setCheckedBoxes={setCheckedBoxes}
+        />
       <div className={classes.SearchResolver}>
         <SearchBar
           className={classes.searchBar}

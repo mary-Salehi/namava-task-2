@@ -6,6 +6,7 @@ export const browseStyles = {
     display: "flex",
     gap: "20px",
     alignItems: 'flex-start',
+    position: 'relative',
 
     [theme.mq(theme.breakpoints.desktop)]: {
       gap: "40px",
@@ -17,17 +18,12 @@ export const browseStyles = {
     display: "flex",
     flexDirection: "column",
     gap: "24px",
+    marginRight: '300px',
 
     [theme.mq(theme.breakpoints.desktop)]: {
       gap: "40px",
+      marginRight: '347px',
     },
-  },
-
-  filters: {
-    position: "sticky",
-    top: "120px",
-    height: "fit-content",
-    alignSelf: "start",
   },
 
 };
