@@ -4,7 +4,7 @@ import SearchBar from "../../components/searchbar/SearchBar";
 import { browseStyles } from "./browsSection.jss";
 import MoviesList from "../../components/moviesList/MoviesList";
 import { useFetch } from "../../hooks/useFetch";
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useDebounce } from "../../hooks/useDebounce";
 
@@ -18,13 +18,11 @@ function BrowseSection() {
   );
   const [checkedBoxes, setCheckedBoxes] = useState({});
 
-  console.log("checkedboxes", checkedBoxes);
-
-  const getContentType = () => {
+  const getContentType = useCallback(() => {
     const activeFilters = Object.entries(checkedBoxes).filter(
       ([key, value]) => value
     );
-    
+
     let type;
 
     if (activeFilters.length === 2) {
@@ -32,8 +30,8 @@ function BrowseSection() {
     } else if (activeFilters.length === 1) {
       type = activeFilters[0][0];
     }
-    return type
-  };
+    return type;
+  }, [checkedBoxes]);
 
   const type = getContentType();
 
@@ -51,7 +49,7 @@ function BrowseSection() {
     return params;
   }, [debouncedSearchQuery, type]);
 
-  const { data } = useFetch("v5.0/search/advance", queries);
+  const { data ,isLoading ,hasMore ,loadMore} = useFetch("v5.0/search/advance", queries);
 
   useEffect(() => {
     if (debouncedSearchQuery) {
@@ -59,7 +57,7 @@ function BrowseSection() {
     } else {
       setSearchParams({});
     }
-  }, [queries, setSearchParams, debouncedSearchQuery]);
+  }, [queries, setSearchParams, debouncedSearchQuery ,type]);
 
   return (
     <div className={classes.browseContainer}>
@@ -74,7 +72,12 @@ function BrowseSection() {
           setSearchQuery={setSearchQuery}
           searchQuery={searchQuery}
         />
-        <MoviesList data={data} />
+        <MoviesList
+          data={data}
+          isLoading={isLoading}
+          hasMore={hasMore}
+          loadMore={loadMore}
+        />
       </div>
     </div>
   );
