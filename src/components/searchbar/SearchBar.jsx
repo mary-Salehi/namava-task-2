@@ -2,7 +2,6 @@ import { createUseStyles } from "react-jss";
 import { searchbarStyles } from "./searchbar.jss";
 import classNames from "classnames";
 import { useEffect, useRef } from "react";
-import { useSessionStorage } from "../../hooks/useSessionStorage";
 
 const useStyles = createUseStyles(searchbarStyles);
 
