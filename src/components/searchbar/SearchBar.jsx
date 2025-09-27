@@ -6,18 +6,17 @@ import { useSessionStorage } from "../../hooks/useSessionStorage";
 
 const useStyles = createUseStyles(searchbarStyles);
 
-function SearchBar() {
+function SearchBar({setSearchQuery , searchQuery}) {
   const classes = useStyles();
-  const [searchValue, setSearchValue] = useSessionStorage("searchValue", "");
   const inputRef = useRef(null);
 
   const handleValueChange = (e) => {
-    setSearchValue(e.target.value);
+    setSearchQuery(e.target.value)    
   };
 
   const handleClearSearch = (e) => {
     e.preventDefault();
-    setSearchValue("");
+    setSearchQuery("");
     if (inputRef.current) {
       inputRef.current.focus();
     }
@@ -73,13 +72,13 @@ function SearchBar() {
       </span>
       <input
         ref={inputRef}
-        value={searchValue}
+        value={searchQuery}
         onChange={handleValueChange}
         className={classes.searchInput}
         type="search"
         placeholder="فیلم، سریال، بازیگر و ژانر"
       />
-      {searchValue && (
+      {searchQuery && (
         <span onMouseDown={handleClearSearch}>
           <svg
             className={classNames(classes.icon, classes.clearSearchIcon)}
