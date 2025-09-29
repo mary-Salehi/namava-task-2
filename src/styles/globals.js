@@ -79,11 +79,11 @@ export const useGlobalStyles = createUseStyles((theme) => ({
 
     ".container": {
       margin: "0 auto",
-      padding: "24px 32px",
+      padding: "84px 32px 24px",
       width: "100%",
 
       [theme.mq(theme.breakpoints.desktop)]: {
-        padding: "24px 42px",
+        padding: "104px 42px 24px",
       },
     },
 
