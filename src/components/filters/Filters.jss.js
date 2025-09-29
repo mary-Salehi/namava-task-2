@@ -6,10 +6,10 @@ export const filtersStyles = {
     backgroundColor: theme.colors.gray5,
     borderRadius: "5px",
     width: "280px",
-    position : 'fixed',
-    top: '104px',
-    alignSelf: 'flex-start',
-    
+    position: "fixed",
+    top: "104px",
+    alignSelf: "flex-start",
+    overflowY: "auto",
 
     [theme.mq(theme.breakpoints.desktop)]: {
       width: "307px",
@@ -53,13 +53,13 @@ export const filtersStyles = {
   filterAccordionContent: {
     display: "flex",
     gap: "16px",
-    maxHeight: '0',
-    overflow: 'hidden',
-    transition: 'max-height 0.2s ease , padding-top 0.2s ease',
+    maxHeight: "0",
+    overflow: "hidden",
+    transition: "max-height 0.2s ease , padding-top 0.2s ease",
   },
 
   accordionOpen: {
-    paddingTop: '16px',
+    paddingTop: "16px",
     maxHeight: '600px',
   },
 

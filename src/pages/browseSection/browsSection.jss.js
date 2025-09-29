@@ -2,11 +2,10 @@ import { theme } from "../../styles/theme";
 
 export const browseStyles = {
   browseContainer: {
-    height: "100%",
+    height: "auto",
     display: "flex",
     gap: "20px",
-    alignItems: 'flex-start',
-    position: 'relative',
+    position: "relative",
 
     [theme.mq(theme.breakpoints.desktop)]: {
       gap: "40px",
@@ -18,12 +17,19 @@ export const browseStyles = {
     display: "flex",
     flexDirection: "column",
     gap: "24px",
-    marginRight: '300px',
+    marginRight: "300px",
+    overflowY: "auto",
 
     [theme.mq(theme.breakpoints.desktop)]: {
       gap: "40px",
-      marginRight: '347px',
+      marginRight: "347px",
     },
   },
 
+  emptyState: {
+    margin: "56px auto 0",
+    [theme.mq(theme.breakpoints.desktop)]: {
+      marginTop: "40px",
+    },
+  },
 };

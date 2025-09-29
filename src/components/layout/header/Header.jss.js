@@ -2,7 +2,7 @@ import { theme } from "../../../styles/theme";
 
 export const headerStyles = {
   nav: {
-    backgroundColor: theme.colors.black,
+    backgroundColor: theme.colors.gray8,
     display: "flex",
     alignItems: "strech",
     justifyContent: "space-between",
