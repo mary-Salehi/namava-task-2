@@ -10,7 +10,7 @@ export const movieCardStyles = {
     position: "relative",
     borderRadius: "4px",
     marginBottom: "8px",
-    overflow: 'hidden',
+    overflow: "hidden",
     background: theme.colors.gray5,
     aspectRatio: "2/3",
 
@@ -19,27 +19,18 @@ export const movieCardStyles = {
     },
   },
 
-  movieImage: {
-    width: '100%',
-    height: '100%',
-    objectFit: 'cover',
-  },
-
   overlay: {
     opacity: 0,
     position: "absolute",
     inset: 0,
-    background: "linear-gradient(to top, rgba(0,0,0,0.9), rgba(0,0,0,0.5))",
-    transition: "opacity 0.5s ease-in-out",
+    background: "linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0.4))",
+    transition: "opacity 0.5s ease-in",
+    pointerEvents: "none",
   },
 
-  info: {
-    display: "flex",
-    flexDirection: "column",
-    position: "absolute",
-    bottom: "20px",
-    right: "15px",
-    lineHeight: "normal",
-    gap: "10px",
+  movieImage: {
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
   },
 };
