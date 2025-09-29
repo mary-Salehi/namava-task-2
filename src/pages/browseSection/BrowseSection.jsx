@@ -7,6 +7,7 @@ import { useFetch } from "../../hooks/useFetch";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useDebounce } from "../../hooks/useDebounce";
+import EmptyState from "../../components/ui/emptyState";
 
 const useStyles = createUseStyles(browseStyles);
 
@@ -51,7 +52,8 @@ function BrowseSection() {
 
   const { data, isLoading, hasMore, loadMore } = useFetch(
     "v5.0/search/advance",
-    queries
+    queries,
+    true
   );
 
   useEffect(() => {
@@ -64,16 +66,14 @@ function BrowseSection() {
 
   return (
     <div className={classes.browseContainer}>
-        <Filters
-          checkedBoxes={checkedBoxes}
-          setCheckedBoxes={setCheckedBoxes}
-        />
+      <Filters checkedBoxes={checkedBoxes} setCheckedBoxes={setCheckedBoxes} />
       <div className={classes.SearchResolver}>
         <SearchBar
           className={classes.searchBar}
           setSearchQuery={setSearchQuery}
           searchQuery={searchQuery}
         />
+        {!data?.length && <EmptyState className={classes.emptyState}/>}
         <MoviesList
           data={data}
           isLoading={isLoading}
