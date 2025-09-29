@@ -3,29 +3,44 @@ import { useCallback, useEffect, useState } from "react";
 
 export const API_BASE = "https://www.namava.ir/api";
 
-export const useFetch = (url, queries) => {
-  const [data, setData] = useState([]);
+export const useFetch = (url, queries, isPaginated = true) => {
+  const [data, setData] = useState(null);
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [hasMore, setHasMore] = useState(true);
 
+  const params = { ...queries };
+  if (isPaginated) {
+    params.page = page;
+    params.count = 20;
+  }
+
   useEffect(() => {
-    setData([]);
-    setPage(1);
-    setHasMore(true);
+    if (isPaginated) {
+      setData([]);
+      setPage(1);
+      setHasMore(true);
+    } else {
+      setData(null);
+    }
     setError(null);
-  }, [url, queries?.query, queries?.type]);
+  }, [url, queries?.query, queries?.type, isPaginated]);
 
   const loadMore = useCallback(() => {
-    if (!hasMore || isLoading) return;
+    if (!hasMore || isLoading || !isPaginated) return;
     setPage((prevPage) => prevPage + 1);
-  }, [hasMore, isLoading]);
+  }, [hasMore, isLoading, isPaginated]);
 
   useEffect(() => {
+    if (!url) {
+      setData(null);
+      return;
+    }
+
     const controller = new AbortController();
 
-    if (!queries.query) {
+    if (url.includes("search") && !queries.query) {
       return () => controller.abort();
     }
 
@@ -35,20 +50,22 @@ export const useFetch = (url, queries) => {
         setError(null);
 
         const response = await axios.get(`${API_BASE}/${url}`, {
-          params: {
-            ...queries,
-            page,
-            count: 20,
-          },
+          params,
           signal: controller.signal,
         });
-        const newItems =
-          response.data.result?.result_items?.[0]?.groups?.Media?.items || [];
 
-        setData((prev) => [...prev, ...newItems]);
+        const responseResult = response.data.result;
 
-        if (newItems.length < 20) {
-          setHasMore(false);
+        if (isPaginated) {
+          const newItems =
+            responseResult?.result_items?.[0]?.groups?.Media?.items || [];
+          setData((prev) => [...prev, ...newItems]);
+
+          if (newItems.length < 20) {
+            setHasMore(false);
+          }
+        } else {
+          setData(responseResult);
         }
       } catch (error) {
         if (error.name !== "AbortError") {
@@ -64,7 +81,7 @@ export const useFetch = (url, queries) => {
     return () => {
       controller.abort();
     };
-  }, [url, queries, page]);
+  }, [url, queries, page, isPaginated]);
 
   return { data, isLoading, error, hasMore, loadMore };
 };
