@@ -66,11 +66,11 @@ export const useGlobalStyles = createUseStyles((theme) => ({
     },
 
     body: {
-      backgroundColor: theme.colors.black,
+      backgroundColor: theme.colors.gray8,
       color: theme.colors.white,
       direction: "rtl",
       fontFamily: theme.fonts.main,
-      lineHeight: '24px',
+      lineHeight: "24px",
 
       [theme.mq(theme.breakpoints.desktop)]: {
         lineHeight: "28px",
@@ -81,7 +81,6 @@ export const useGlobalStyles = createUseStyles((theme) => ({
       margin: "0 auto",
       padding: "24px 32px",
       width: "100%",
-      height: "100vh",
 
       [theme.mq(theme.breakpoints.desktop)]: {
         padding: "24px 42px",
@@ -89,7 +88,7 @@ export const useGlobalStyles = createUseStyles((theme) => ({
     },
 
     ".mainContent": {
-      display: 'grid'
+      display: "grid",
     },
 
     "*, *::before, *::after": {
