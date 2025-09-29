@@ -2,7 +2,13 @@ import { theme } from "../../../styles/theme";
 
 export const headerStyles = {
   nav: {
-    backgroundColor: theme.colors.gray8,
+    position: 'fixed',
+    top: 0,
+    width: '100%',
+    zIndex: 100,
+    transform: ({isHeaderFixed}) => (isHeaderFixed ? 'translateY(0)' : 'translateY(-100%)'),
+    transition: 'all 0.5s ease',
+    background: theme.colors.gray8,
     display: "flex",
     alignItems: "strech",
     justifyContent: "space-between",

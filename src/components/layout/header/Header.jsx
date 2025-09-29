@@ -2,11 +2,14 @@ import { createUseStyles } from "react-jss";
 import { navLinks } from "../../../constants/headerNavigation";
 import { headerStyles } from "./Header.jss";
 import classNames from "classnames";
+import { useScroll } from "../../../hooks/useScroll";
 
 const useStyles = createUseStyles(headerStyles);
 
 function Header() {
-  const classes = useStyles();
+  const isHeaderFixed = useScroll()
+  const classes = useStyles({isHeaderFixed});
+
   return (
     <header className={classes.header}>
       <nav className={classes.nav}>
