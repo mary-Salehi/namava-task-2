@@ -8,6 +8,8 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useDebounce } from "../../hooks/useDebounce";
 import EmptyState from "../../components/ui/emptyState";
+import NotFound from "../../components/ui/notFound";
+import Loader from "../../components/ui/loader";
 
 const useStyles = createUseStyles(browseStyles);
 
@@ -50,7 +52,7 @@ function BrowseSection() {
     return params;
   }, [debouncedSearchQuery, type]);
 
-  const { data, isLoading, hasMore, loadMore } = useFetch(
+  const { data, error, isLoading, hasMore, loadMore } = useFetch(
     "v5.0/search/advance",
     queries,
     true
@@ -64,6 +66,9 @@ function BrowseSection() {
     }
   }, [queries, setSearchParams, debouncedSearchQuery, type]);
 
+  const hasNoSearchData =
+    !isLoading && !error && data && data.length === 0 && searchQuery;
+
   return (
     <div className={classes.browseContainer}>
       <Filters checkedBoxes={checkedBoxes} setCheckedBoxes={setCheckedBoxes} />
@@ -73,7 +78,11 @@ function BrowseSection() {
           setSearchQuery={setSearchQuery}
           searchQuery={searchQuery}
         />
-        {!data?.length && <EmptyState className={classes.emptyState}/>}
+        {isLoading && data.length === 0 && <Loader />}
+        {!data?.length && !searchQuery && (
+          <EmptyState className={classes.emptyState} />
+        )}
+        {hasNoSearchData && <NotFound />}
         <MoviesList
           data={data}
           isLoading={isLoading}
