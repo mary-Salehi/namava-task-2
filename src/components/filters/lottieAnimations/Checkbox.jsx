@@ -1,5 +1,7 @@
-import React from "react";
+import { Player } from "@lottiefiles/react-lottie-player";
+import CheckboxAnimation from "./CheckboxAnimation.json";
 import { createUseStyles } from "react-jss";
+import React, { useEffect, useRef, useState } from "react";
 
 const useStyles = createUseStyles({
   container: {
@@ -13,21 +15,23 @@ const useStyles = createUseStyles({
   lottie: {
     width: 18,
     height: 18,
-    pointerEvents: "none",
+    cursor: "pointer",
   },
   hiddenCheckbox: {
     position: "absolute",
     opacity: 0,
-    width: 16,
-    height: 16,
+    width: 18,
+    height: 18,
     margin: 0,
     padding: 0,
   },
 });
 
-
 const Checkbox = React.memo(({ label, id, toggle, checked }) => {
   const classes = useStyles();
+  const playerRef = useRef(null);
+
+
   return (
     <label htmlFor={id} className={classes.container}>
       <input
@@ -37,6 +41,14 @@ const Checkbox = React.memo(({ label, id, toggle, checked }) => {
         onChange={() => toggle(id)}
         className={classes.hiddenCheckbox}
         aria-hidden="true"
+      />
+      <Player
+        ref={playerRef}
+        src={CheckboxAnimation}
+        className={classes.lottie}
+        autoplay={false}
+        loop={false}
+        speed={1.5}
       />
       {label}
     </label>
