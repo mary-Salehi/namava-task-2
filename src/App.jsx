@@ -8,6 +8,10 @@ function App() {
   useGlobalStyles();
 
   useEffect(() => {
+    document.title = 'جستجو';
+  }, []);
+
+  useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
