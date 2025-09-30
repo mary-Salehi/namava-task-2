@@ -1,5 +1,5 @@
 import { createUseStyles } from "react-jss";
-import { movieCardStyles } from "./movieCard.jss";
+import { movieCardStyles } from "./styles";
 import { useCallback, useState } from "react";
 import { useMoviePreview } from "../../hooks/useMoviePreview";
 import { useDebounce } from "../../hooks/useDebounce";

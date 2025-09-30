@@ -1,6 +1,6 @@
 import { createUseStyles } from "react-jss";
-import MovieCard from "../movieCard/MovieCard";
-import { moviesListStyles } from "./moviesList.jss";
+import MovieCard from "../movieCard";
+import { moviesListStyles } from "./styles";
 import { useCallback, useEffect, useRef } from "react";
 import LastCard from "../movieCard/lastCard";
 

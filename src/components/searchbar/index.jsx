@@ -1,5 +1,5 @@
 import { createUseStyles } from "react-jss";
-import { searchbarStyles } from "./searchbar.jss";
+import { searchbarStyles } from "./styles";
 import classNames from "classnames";
 import { useEffect, useRef } from "react";
 

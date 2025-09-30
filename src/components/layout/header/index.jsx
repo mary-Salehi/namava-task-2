@@ -1,6 +1,6 @@
 import { createUseStyles } from "react-jss";
 import { navLinks } from "../../../constants/headerNavigation";
-import { headerStyles } from "./Header.jss";
+import { headerStyles } from "./styles";
 import classNames from "classnames";
 import { useScroll } from "../../../hooks/useScroll";
 

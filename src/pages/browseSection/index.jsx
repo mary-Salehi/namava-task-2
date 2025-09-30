@@ -1,8 +1,8 @@
 import { createUseStyles } from "react-jss";
-import Filters from "../../components/filters/Filters";
-import SearchBar from "../../components/searchbar/SearchBar";
-import { browseStyles } from "./browsSection.jss";
-import MoviesList from "../../components/moviesList/MoviesList";
+import Filters from "../../components/filters";
+import SearchBar from "../../components/searchbar";
+import { browseStyles } from "./styles";
+import MoviesList from "../../components/moviesList";
 import { useFetch } from "../../hooks/useFetch";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";

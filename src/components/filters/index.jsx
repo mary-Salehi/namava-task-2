@@ -1,9 +1,9 @@
 import { createUseStyles } from "react-jss";
-import { filtersStyles } from "./Filters.jss";
+import { filtersStyles } from "./styles";
 import { filterSections } from "./filtersSection";
 import classNames from "classnames";
 import { useCallback, useState } from "react";
-import Checkbox from "./lottieAnimations/Checkbox";
+import Checkbox from "./checkbox/index";
 
 const useStyles = createUseStyles(filtersStyles);
 
@@ -21,8 +21,6 @@ function Filters({checkedBoxes,setCheckedBoxes}) {
   const toggleCheckbox = useCallback((id) => {
     setCheckedBoxes((prev) => {
       const updated = { ...prev, [id]: !prev[id] };
-      console.log(updated);
-      
       return updated;
     });
   }, []);
