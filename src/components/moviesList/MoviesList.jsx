@@ -2,6 +2,7 @@ import { createUseStyles } from "react-jss";
 import MovieCard from "../movieCard/MovieCard";
 import { moviesListStyles } from "./moviesList.jss";
 import { useCallback, useEffect, useRef } from "react";
+import LastCard from "../movieCard/lastCard";
 
 const useStyles = createUseStyles(moviesListStyles);
 
@@ -11,7 +12,7 @@ function MoviesList({ data, isLoading, hasMore, loadMore }) {
 
   const lastItemRefCallback = useCallback(
     (node) => {
-      if (isLoading) return;
+      if (isLoading) return
 
       if (observer.current) {
         observer.current.disconnect();
@@ -51,7 +52,9 @@ function MoviesList({ data, isLoading, hasMore, loadMore }) {
 
         return (
           <div ref={isLastCard ? lastItemRefCallback : null} key={movie.id}>
-            <MovieCard movie={movie} />
+            {
+              isLoading && isLastCard ? <LastCard/> : <MovieCard movie={movie} />
+            }
           </div>
         );
       })}
