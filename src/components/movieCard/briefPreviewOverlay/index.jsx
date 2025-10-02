@@ -1,5 +1,5 @@
 import { createUseStyles } from "react-jss";
-import { convertToPersianNumbers } from "../../../utils/convertNumbers";
+import { convertToPersianNumbers } from "../../../utils/convertToPersianNumbers";
 import { briefPreviewStyles } from "./styles";
 
 const useStyles = createUseStyles(briefPreviewStyles);
