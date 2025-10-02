@@ -13,12 +13,6 @@ export const theme = {
     red: "#d95c5c",
     blue: "#6eb8ff",
   },
-  // spacing: {
-  //   small: "8px",
-  //   medium: "16px",
-  //   large: "24px",
-  //   xlarge: "32px",
-  // },
   breakpoints: {
     tablet: "800",
     desktop: "1280",
