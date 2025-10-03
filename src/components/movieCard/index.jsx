@@ -1,11 +1,9 @@
-import { createUseStyles } from "react-jss";
-import { movieCardStyles } from "./styles";
+import { useStyles } from "./styles";
 import { useCallback, useState } from "react";
 import { useMoviePreview } from "../../hooks/useMoviePreview";
 import { useDebounce } from "../../hooks/useDebounce";
 import BriefPreview from "./briefPreviewOverlay";
 
-const useStyles = createUseStyles(movieCardStyles);
 
 function MovieCard({ movie }) {
   const classes = useStyles();

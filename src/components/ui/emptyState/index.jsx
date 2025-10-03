@@ -1,7 +1,4 @@
-import { createUseStyles } from "react-jss";
-import { emptyStateStyles } from "./styles.jss";
-
-const useStyles = createUseStyles(emptyStateStyles);
+import { useStyles } from "./styles.jss";
 
 function EmptyState() {
   const classes = useStyles();

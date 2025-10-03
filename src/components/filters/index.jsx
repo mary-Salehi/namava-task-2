@@ -1,12 +1,10 @@
-import { createUseStyles } from "react-jss";
-import { filtersStyles } from "./styles";
+import { useStyles } from "./styles";
 import { filterSections } from "./filtersSection";
 import classNames from "classnames";
 import { useCallback, useState } from "react";
 import Checkbox from "./checkbox/index";
 import ChevronDownIcon from "../icons/ChevronDownIcon";
 
-const useStyles = createUseStyles(filtersStyles);
 
 function Filters({ checkedBoxes, setCheckedBoxes }) {
   const classes = useStyles();

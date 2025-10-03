@@ -1,6 +1,7 @@
+import { createUseStyles } from "react-jss";
 import { theme } from "../../styles/theme";
 
-export const browseStyles = {
+const styles = {
   browseContainer: {
     height: "auto",
     display: "flex",
@@ -33,3 +34,5 @@ export const browseStyles = {
     },
   },
 };
+
+export const useStyles = createUseStyles(styles);

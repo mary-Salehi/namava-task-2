@@ -1,8 +1,6 @@
-import { createUseStyles } from "react-jss";
 import { convertToPersianNumbers } from "../../../utils/convertToPersianNumbers";
-import { briefPreviewStyles } from "./styles";
+import { useStyles } from "./styles";
 
-const useStyles = createUseStyles(briefPreviewStyles);
 
 function BriefPreview({ briefPreview, isHovered , movie}) {
   const classes = useStyles({isHovered});

@@ -1,7 +1,6 @@
-import { createUseStyles } from "react-jss";
 import Filters from "../../components/filters";
 import SearchBar from "../../components/searchbar";
-import { browseStyles } from "./styles";
+import { useStyles } from "./styles";
 import MoviesList from "../../components/moviesList";
 import { useFetch } from "../../hooks/useFetch";
 import { useCallback, useEffect, useMemo, useState } from "react";
@@ -10,8 +9,6 @@ import { useDebounce } from "../../hooks/useDebounce";
 import EmptyState from "../../components/ui/emptyState";
 import NotFound from "../../components/ui/notFound";
 import Loader from "../../components/ui/loader";
-
-const useStyles = createUseStyles(browseStyles);
 
 function BrowseSection() {
   const classes = useStyles();

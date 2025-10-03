@@ -1,7 +1,4 @@
-import { createUseStyles } from "react-jss";
-import { notFoundStyles } from "./styles";
-
-const useStyles = createUseStyles(notFoundStyles);
+import { useStyles } from "./styles";
 
 function NotFound() {
   const classes = useStyles();

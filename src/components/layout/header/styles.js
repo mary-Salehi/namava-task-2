@@ -1,6 +1,7 @@
+import { createUseStyles } from "react-jss";
 import { theme } from "../../../styles/theme";
 
-export const headerStyles = {
+const styles = {
   nav: {
     position: "fixed",
     top: 0,
@@ -82,3 +83,5 @@ export const headerStyles = {
     },
   },
 };
+
+export const useStyles = createUseStyles(styles);

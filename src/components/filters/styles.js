@@ -1,6 +1,7 @@
+import { createUseStyles } from "react-jss";
 import { theme } from "../../styles/theme";
 
-export const filtersStyles = {
+const styles = {
   filterSection: {
     padding: "16px 24px",
     backgroundColor: theme.colors.gray5,
@@ -99,3 +100,5 @@ export const filtersStyles = {
     fill: theme.colors.white,
   },
 };
+
+export const useStyles = createUseStyles(styles);

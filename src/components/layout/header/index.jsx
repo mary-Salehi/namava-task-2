@@ -1,6 +1,5 @@
-import { createUseStyles } from "react-jss";
+import { useStyles } from "./styles";
 import { navLinks } from "../../../constants/navLinks";
-import { headerStyles } from "./styles";
 import classNames from "classnames";
 import { useScroll } from "../../../hooks/useScroll";
 import NamavaLogo from "../../icons/NamavaLogo";
@@ -8,7 +7,6 @@ import SearchIcon from "../../icons/SearchIcon";
 import MessageIcon from "../../icons/MessageIcon";
 import { Link } from "react-router-dom";
 
-const useStyles = createUseStyles(headerStyles);
 
 function Header() {
   const isHeaderFixed = useScroll()

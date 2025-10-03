@@ -1,6 +1,7 @@
+import { createUseStyles } from "react-jss";
 import { theme } from "../../../styles/theme";
 
-export const briefPreviewStyles = {
+const styles = {
   overlay: {
     opacity: ({ isHovered }) => (isHovered ? 1 : 0),
     position: "absolute",
@@ -33,3 +34,5 @@ export const briefPreviewStyles = {
     fill: theme.colors.white,
   },
 };
+
+export const useStyles = createUseStyles(styles);

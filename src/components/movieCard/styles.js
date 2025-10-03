@@ -1,6 +1,7 @@
+import { createUseStyles } from "react-jss";
 import { theme } from "../../styles/theme";
 
-export const movieCardStyles = {
+const styles = {
   cardWrapper: {
     fontSize: "12px",
     cursor: "pointer",
@@ -34,3 +35,5 @@ export const movieCardStyles = {
     objectFit: "cover",
   },
 };
+
+export const useStyles = createUseStyles(styles);

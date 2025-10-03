@@ -1,6 +1,7 @@
+import { createUseStyles } from "react-jss";
 import { theme } from "../../../styles/theme";
 
-export const emptyStateStyles = {
+const styles = {
   emptyState: {
     width: "400px",
     textAlign: "center",
@@ -9,3 +10,5 @@ export const emptyStateStyles = {
     margin: '0 auto',
   },
 };
+
+export const useStyles = createUseStyles(styles);

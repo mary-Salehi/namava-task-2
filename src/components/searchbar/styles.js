@@ -1,10 +1,11 @@
+import { createUseStyles } from "react-jss";
 import { theme } from "../../styles/theme";
 
-export const searchbarStyles = {
+const searchbarStyles = {
   searchContainer: {
     display: "flex",
     alignItems: "center",
-    fontSize: '14px',
+    fontSize: "14px",
     height: "60px",
     padding: "0 16px",
     borderRadius: "5px",
@@ -13,7 +14,7 @@ export const searchbarStyles = {
     "&:focus-within": {
       backgroundColor: theme.colors.white,
 
-      '& $icon': {
+      "& $icon": {
         color: theme.colors.gray3,
       },
     },
@@ -41,6 +42,8 @@ export const searchbarStyles = {
   },
 
   clearSearchIcon: {
-    cursor: 'pointer',
-  }
+    cursor: "pointer",
+  },
 };
+
+export const useStyles = createUseStyles(searchbarStyles);
