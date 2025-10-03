@@ -1,4 +1,4 @@
-import { useStyles } from "./styles.jss";
+import { useStyles } from "./styles.";
 
 function EmptyState() {
   const classes = useStyles();
