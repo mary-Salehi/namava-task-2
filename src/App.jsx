@@ -1,5 +1,4 @@
 import { useGlobalStyles } from "./styles/globals";
-// import BrowseSection from "./pages/browseSection";
 import { useEffect } from "react";
 import Header from "./components/layout/header/index";
 import BrowseSection from "./pages/browseSection";
