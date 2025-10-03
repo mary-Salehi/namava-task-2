@@ -2,12 +2,13 @@ import { theme } from "../../../styles/theme";
 
 export const headerStyles = {
   nav: {
-    position: 'fixed',
+    position: "fixed",
     top: 0,
-    width: '100%',
+    width: "100%",
     zIndex: 100,
-    transform: ({isHeaderFixed}) => (isHeaderFixed ? 'translateY(0)' : 'translateY(-100%)'),
-    transition: 'all 0.5s ease',
+    transform: ({ isHeaderFixed }) =>
+      isHeaderFixed ? "translateY(0)" : "translateY(-100%)",
+    transition: "all 0.5s ease",
     background: theme.colors.gray8,
     display: "flex",
     alignItems: "strech",
@@ -27,12 +28,9 @@ export const headerStyles = {
 
   navLogo: {
     display: "flex",
-
-    "& svg": {
-      [theme.mq(theme.breakpoints.desktop)]: {
-        width: "64px",
-        height: "auto",
-      },
+    [theme.mq(theme.breakpoints.desktop)]: {
+      width: "64px",
+      height: "auto",
     },
   },
 
@@ -74,16 +72,13 @@ export const headerStyles = {
   headerIcon: {
     display: "flex",
     alignItems: "center",
-    cursor: 'pointer',
+    cursor: "pointer",
+    width: "30px",
+    height: "30px",
 
-    "& > *": {
-      width: "30px",
-      height: "30px",
-
-      [theme.mq(theme.breakpoints.desktop)]: {
-        width: "40px",
-        height: "40px",
-      },
+    [theme.mq(theme.breakpoints.desktop)]: {
+      width: "40px",
+      height: "40px",
     },
   },
 };
