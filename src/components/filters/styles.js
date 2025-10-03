@@ -96,8 +96,6 @@ export const filtersStyles = {
   },
 
   chevronIcon: {
-    "& svg": {
-      fill: theme.colors.white,
-    },
+    fill: theme.colors.white,
   },
 };
