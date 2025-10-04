@@ -4,7 +4,7 @@ import axios from "axios";
 
 const cachedPreview = new Map();
 
-export const useMoviePreview = (movieId, isHovered) => {
+export const useMediaPreview = (movieId, isHovered) => {
   const [briefPreview, setBriefPreview] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);

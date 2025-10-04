@@ -10,7 +10,7 @@ import EmptyState from "../../components/ui/emptyState";
 import NotFound from "../../components/ui/notFound";
 import Loader from "../../components/ui/loader";
 
-function BrowseSection() {
+function Search() {
   const classes = useStyles();
   const [searchParams, setSearchParams] = useSearchParams();
   const [searchQuery, setSearchQuery] = useState(
@@ -91,4 +91,4 @@ function BrowseSection() {
   );
 }
 
-export default BrowseSection;
+export default Search;
