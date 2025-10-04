@@ -50,10 +50,11 @@ function Search() {
   }, [debouncedSearchQuery, type]);
 
   const { data, error, isLoading, hasMore, loadMore } = useFetch(
-    "v5.0/search/advance",
+    searchQuery ? "v5.0/search/advance" : [],
     queries,
     true
   );
+  console.log("search page data", data);
 
   useEffect(() => {
     if (debouncedSearchQuery) {
@@ -75,8 +76,8 @@ function Search() {
           setSearchQuery={setSearchQuery}
           searchQuery={searchQuery}
         />
-        {isLoading && data.length === 0 && <Loader />}
-        {!data?.length && !searchQuery && (
+        {isLoading && searchQuery && !data?.length && <Loader />}
+        {!isLoading && !searchQuery && !data?.length && (
           <EmptyState className={classes.emptyState} />
         )}
         {hasNoSearchData && <NotFound />}
