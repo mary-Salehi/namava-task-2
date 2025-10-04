@@ -32,6 +32,7 @@ const styles = {
     alignItems: "center",
     justifyContent: "center",
     fill: theme.colors.white,
+    color: theme.colors.white,
   },
 };
 
