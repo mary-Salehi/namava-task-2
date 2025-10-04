@@ -1,7 +1,7 @@
 import { useGlobalStyles } from "./styles/globals";
 import { useEffect } from "react";
 import Header from "./components/layout/header/index";
-import BrowseSection from "./pages/browseSection";
+import Search from "./pages/search";
 
 function App() {
   useGlobalStyles();
@@ -18,7 +18,7 @@ function App() {
     <div>
       <Header />
       <main className="container">
-        <BrowseSection />
+        <Search />
       </main>
     </div>
   );
