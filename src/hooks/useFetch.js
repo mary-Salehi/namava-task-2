@@ -21,7 +21,6 @@ export const useFetch = (url, queries, isPaginated = true) => {
       setData([]);
       setPage(1);
       setHasMore(true);
-      console.log("data isPaginated effect became", data);
     } else {
       setData(null);
     }
@@ -35,7 +34,7 @@ export const useFetch = (url, queries, isPaginated = true) => {
 
   useEffect(() => {
     if (!url) {
-      setData(null);
+      setData(isPaginated ? [] : null);
       return;
     }
 
@@ -46,21 +45,16 @@ export const useFetch = (url, queries, isPaginated = true) => {
         setIsLoading(true);
         setError(null);
 
-        const response = await axios.get(
-          queries.query ? `${API_BASE}/${url}` : null,
-          {
-            params,
-            signal: controller.signal,
-          }
-        );
+        const response = await axios.get(`${API_BASE}/${url}`, {
+          params,
+          signal: controller.signal,
+        });
 
         const responseResult = response.data.result;
 
         if (isPaginated) {
-          console.log("before setData newitems data is", data);
           const newItems =
             responseResult?.result_items?.[0]?.groups?.Media?.items || [];
-          console.log("before setData newItems", data);
           setData((prev) => [...prev, ...newItems]);
 
           if (newItems.length < 20) {
