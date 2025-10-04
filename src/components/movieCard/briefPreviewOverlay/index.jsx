@@ -7,6 +7,8 @@ import { useStyles } from "./styles";
 
 function BriefPreview({ briefPreview, isHovered, movie }) {
   const classes = useStyles({ isHovered });
+  console.log(briefPreview.hit);
+
   return (
     <div className={classes.overlay}>
       <div className={classes.info}>
@@ -15,10 +17,12 @@ function BriefPreview({ briefPreview, isHovered, movie }) {
           <span>{convertToPersianNumbers(briefPreview.year)}</span>
         </div>
 
-        <div className={classes.flexRow}>
-          <HeartIcon className={classes.icon} />
-          <span>{convertToPersianNumbers(briefPreview.hit)}%</span>
-        </div>
+        {briefPreview.hit !== 0 && (
+          <div className={classes.flexRow}>
+            <HeartIcon className={classes.icon} />
+            <span>{convertToPersianNumbers(briefPreview.hit)}%</span>
+          </div>
+        )}
 
         {briefPreview.imdb && (
           <div className={classes.flexRow}>
@@ -27,26 +31,24 @@ function BriefPreview({ briefPreview, isHovered, movie }) {
           </div>
         )}
 
-        <div>
-          {(briefPreview.hasPersianSubtitle ||
-            briefPreview.dubsType !== "None") && (
-            <div className={classes.flexRow}>
-              {briefPreview.dubsType !== "None" ? (
-                <div className={classes.flexRow}>
-                  <MicIcon className={classes.icon} />
-                  {briefPreview.dubsType === "ExclusiveDubs"
-                    ? "دوبله نماوا"
-                    : "دوبله اختصاصی"}
-                </div>
-              ) : briefPreview.dubsType == "None" ? (
-                <div className={classes.flexRow}>
-                  <SubtitleIcon className={classes.icon} />
-                  <span>زیرنویس</span>
-                </div>
-              ) : null}
-            </div>
-          )}
-        </div>
+        {(briefPreview.hasPersianSubtitle ||
+          briefPreview.dubsType !== "None") && (
+          <div className={classes.flexRow}>
+            {briefPreview.dubsType !== "None" ? (
+              <div className={classes.flexRow}>
+                <MicIcon className={classes.icon} />
+                {briefPreview.dubsType === "ExclusiveDubs"
+                  ? "دوبله نماوا"
+                  : "دوبله اختصاصی"}
+              </div>
+            ) : briefPreview.dubsType == "None" ? (
+              <div className={classes.flexRow}>
+                <SubtitleIcon className={classes.icon} />
+                <span>زیرنویس</span>
+              </div>
+            ) : null}
+          </div>
+        )}
       </div>
     </div>
   );
