@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 export const API_BASE = "https://www.namava.ir/api";
 
 export const useFetch = (url, queries, isPaginated = true) => {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState(isPaginated ? [] : null);
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -21,11 +21,12 @@ export const useFetch = (url, queries, isPaginated = true) => {
       setData([]);
       setPage(1);
       setHasMore(true);
+      console.log("data isPaginated effect became", data);
     } else {
       setData(null);
     }
     setError(null);
-  }, [url, queries?.query, queries?.type, isPaginated]);
+  }, [queries.query, queries.type, isPaginated]);
 
   const loadMore = useCallback(() => {
     if (!hasMore || isLoading || !isPaginated) return;
@@ -40,25 +41,26 @@ export const useFetch = (url, queries, isPaginated = true) => {
 
     const controller = new AbortController();
 
-    if (url.includes("search") && !queries.query) {
-      return () => controller.abort();
-    }
-
     async function fetchData() {
       try {
         setIsLoading(true);
         setError(null);
 
-        const response = await axios.get(`${API_BASE}/${url}`, {
-          params,
-          signal: controller.signal,
-        });
+        const response = await axios.get(
+          queries.query ? `${API_BASE}/${url}` : null,
+          {
+            params,
+            signal: controller.signal,
+          }
+        );
 
         const responseResult = response.data.result;
 
         if (isPaginated) {
+          console.log("before setData newitems data is", data);
           const newItems =
             responseResult?.result_items?.[0]?.groups?.Media?.items || [];
+          console.log("before setData newItems", data);
           setData((prev) => [...prev, ...newItems]);
 
           if (newItems.length < 20) {
@@ -81,7 +83,7 @@ export const useFetch = (url, queries, isPaginated = true) => {
     return () => {
       controller.abort();
     };
-  }, [url, queries, page, isPaginated]);
+  }, [queries, page, isPaginated]);
 
   return { data, isLoading, error, hasMore, loadMore };
 };
