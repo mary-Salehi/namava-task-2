@@ -7,7 +7,6 @@ import { useStyles } from "./styles";
 
 function BriefPreview({ briefPreview, isHovered, movie }) {
   const classes = useStyles({ isHovered });
-  console.log(briefPreview.hit);
 
   return (
     <div className={classes.overlay}>
