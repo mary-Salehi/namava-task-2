@@ -10,12 +10,6 @@ function MovieCard({ movie }) {
   const debouncedHover = useDebounce(isHovered, 300);
   const { briefPreview } = useMediaPreview(movie.id, debouncedHover);
 
-  // const { data: briefPreview } = useFetch(
-  //   debouncedHover ? `v1.0/medias/${movie.id}/brief-preview` : null,
-  //   {},
-  //   false
-  // );
-
   const handleMouseEnter = useCallback(() => setIsHovered(true), []);
   const handleMouseLeave = useCallback(() => setIsHovered(false), []);
 
