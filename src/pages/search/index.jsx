@@ -16,8 +16,6 @@ function Search() {
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get("query") || "";
   const savedType = searchParams.get("type") || "";
-  console.log('the queries change made rerender');
-  
 
   useEffect(() => {
     const initialCheckedBoxes = {};
@@ -68,9 +66,6 @@ function Search() {
   useEffect(() => {
     setSearchParams(queries);
   }, [queries.query, queries.type]);
-
-  console.log('queries in search' , queries);
-  console.log('params in search' , searchParams);
 
   const { data, error, isLoading, hasMore, loadMore } =
     useFetchSearchData(queries);
