@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { API_BASE } from "./useFetch";
-import axios from "axios";
+import apiService from "../services/apiService";
 
 const cachedPreview = new Map();
 
@@ -8,6 +7,8 @@ export const useMediaPreview = (movieId, isHovered) => {
   const [briefPreview, setBriefPreview] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  const END_POINT = `/v1.0/medias/${movieId}/brief-preview`;
 
   useEffect(() => {
     if (!isHovered || !movieId) {
@@ -29,13 +30,8 @@ export const useMediaPreview = (movieId, isHovered) => {
         setIsLoading(true);
         setError(null);
 
-        const response = await axios.get(
-          `${API_BASE}/v1.0/medias/${movieId}/brief-preview`,
-          {
-            signal: controller.signal,
-          }
-        );
-        // Cache data
+        const response = await apiService({endpoint: END_POINT})
+  
         cachedPreview.set(cacheKey, response.data.result);
         setBriefPreview(response.data.result);
       } catch (err) {
