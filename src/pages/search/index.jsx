@@ -65,10 +65,6 @@ function Search() {
     return params;
   }, [debouncedSearchQuery, type]);
 
-  // useEffect(() => {
-  //   setSearchParams(queries);
-  // }, [queries]);
-
   useEffect(() => {
     setSearchParams(queries);
   }, [queries.query, queries.type]);
