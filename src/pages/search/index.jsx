@@ -2,21 +2,35 @@ import Filters from "../../components/filters";
 import SearchBar from "../../components/searchbar";
 import { useStyles } from "./styles";
 import MoviesList from "../../components/moviesList";
-import { useFetch } from "../../hooks/useFetch";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useDebounce } from "../../hooks/useDebounce";
 import EmptyState from "../../components/ui/emptyState";
 import NotFound from "../../components/ui/notFound";
 import Loader from "../../components/ui/loader";
+import useFetchSearchData from "../../hooks/useFetchSearchData";
 
 function Search() {
   const classes = useStyles();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [searchQuery, setSearchQuery] = useState(
-    searchParams.get("query") || ""
-  );
   const [checkedBoxes, setCheckedBoxes] = useState({});
+  const [searchParams, setSearchParams] = useSearchParams();
+  const searchQuery = searchParams.get("query") || "";
+  const savedType = searchParams.get("type") || "";
+  console.log('the queries change made rerender');
+  
+
+  useEffect(() => {
+    const initialCheckedBoxes = {};
+
+    if (savedType === "all") {
+      initialCheckedBoxes.movie = true;
+      initialCheckedBoxes.series = true;
+    } else if (savedType === "movie" || savedType === "series") {
+      initialCheckedBoxes[savedType] = true;
+    }
+
+    setCheckedBoxes(initialCheckedBoxes);
+  }, []);
 
   const getContentType = useCallback(() => {
     const activeFilters = Object.entries(checkedBoxes).filter(
@@ -33,14 +47,16 @@ function Search() {
     return type;
   }, [checkedBoxes]);
 
-  const type = getContentType();
+  let type = getContentType();
 
   const debouncedSearchQuery = useDebounce(searchQuery, 500);
 
   const queries = useMemo(() => {
-    const params = {
-      query: debouncedSearchQuery,
-    };
+    const params = {};
+
+    if (debouncedSearchQuery) {
+      params.query = debouncedSearchQuery;
+    }
 
     if (type) {
       params.type = type;
@@ -49,20 +65,19 @@ function Search() {
     return params;
   }, [debouncedSearchQuery, type]);
 
-  const { data, error, isLoading, hasMore, loadMore } = useFetch(
-    searchQuery ? "v5.0/search/advance" : [],
-    queries,
-    true
-  );
-  console.log("search page data", data);
+  // useEffect(() => {
+  //   setSearchParams(queries);
+  // }, [queries]);
 
   useEffect(() => {
-    if (debouncedSearchQuery) {
-      setSearchParams(queries);
-    } else {
-      setSearchParams({});
-    }
-  }, [queries, setSearchParams, debouncedSearchQuery, type]);
+    setSearchParams(queries);
+  }, [queries.query, queries.type]);
+
+  console.log('queries in search' , queries);
+  console.log('params in search' , searchParams);
+
+  const { data, error, isLoading, hasMore, loadMore } =
+    useFetchSearchData(queries);
 
   const hasNoSearchData =
     !isLoading && !error && data && data.length === 0 && searchQuery;
@@ -72,8 +87,10 @@ function Search() {
       <Filters checkedBoxes={checkedBoxes} setCheckedBoxes={setCheckedBoxes} />
       <div className={classes.SearchResolver}>
         <SearchBar
+          type={type}
+          queries={queries}
           className={classes.searchBar}
-          setSearchQuery={setSearchQuery}
+          setSearchParams={setSearchParams}
           searchQuery={searchQuery}
         />
         {isLoading && searchQuery && !data?.length && <Loader />}

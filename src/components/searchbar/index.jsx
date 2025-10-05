@@ -4,17 +4,35 @@ import { useEffect, useRef } from "react";
 import DeleteIcon from "../icons/DeleteIcon";
 import SearchIcon from "../icons/SearchIcon";
 
-function SearchBar({setSearchQuery , searchQuery}) {
+function SearchBar({ setSearchParams, searchQuery, type }) {
   const classes = useStyles();
   const inputRef = useRef(null);
 
   const handleValueChange = (e) => {
-    setSearchQuery(e.target.value)    
+    const newQuery = e.target.value;
+    const params = {};
+    if (newQuery) {
+      params.query = newQuery;
+    }
+
+    if (type) {
+      params.type = type;
+    }
+
+    setSearchParams(params);
+    console.log('after value change params are',params);
+    
   };
 
   const handleClearSearch = (e) => {
     e.preventDefault();
-    setSearchQuery("");
+
+    const params = {};
+    if (type) {
+      params.type = type;
+    }
+    setSearchParams(params);
+        console.log('after clear search params are',params);
     if (inputRef.current) {
       inputRef.current.focus();
     }
@@ -28,7 +46,7 @@ function SearchBar({setSearchQuery , searchQuery}) {
 
   return (
     <div className={classes.searchContainer}>
-      <SearchIcon className={classes.icon}/>
+      <SearchIcon className={classes.icon} />
       <input
         ref={inputRef}
         value={searchQuery}
@@ -38,7 +56,10 @@ function SearchBar({setSearchQuery , searchQuery}) {
         placeholder="فیلم، سریال، بازیگر و ژانر"
       />
       {searchQuery && (
-        <DeleteIcon onClick={handleClearSearch} className={classNames(classes.icon, classes.clearSearchIcon)}/>
+        <DeleteIcon
+          onClick={handleClearSearch}
+          className={classNames(classes.icon, classes.clearSearchIcon)}
+        />
       )}
     </div>
   );
