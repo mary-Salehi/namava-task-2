@@ -9,6 +9,7 @@ const useFetchSearchData = (queries) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [hasMore, setHasMore] = useState(true);
+  const [hasFetched, setHasFetched] = useState(false);
 
   const loadMore = useCallback(() => {
     if (!hasMore || isLoading) return;
@@ -20,17 +21,19 @@ const useFetchSearchData = (queries) => {
     setPage(1);
     setHasMore(true);
     setError(null);
+    setIsLoading(false);
+    setHasFetched(false);
   }, [queries.query, queries.type]);
 
   useEffect(() => {
-    if (!queries.query) {
-      // setData([]);
-      return;
-    }
+    if (!queries.query) return;
     if (isLoading) return;
 
-    setError(null);
     setIsLoading(true);
+    setHasFetched(true);
+    setError(null);
+
+    const controller = new AbortController();
 
     apiService({
       endpoint: END_POINT,
@@ -39,20 +42,23 @@ const useFetchSearchData = (queries) => {
         count: 20,
         ...queries,
       },
+      signal: controller.signal,
     })
       .then((response) => {
         const responseResult = response.data.result;
 
         const newItems =
           responseResult?.result_items?.[0]?.groups?.Media?.items || [];
-        if (page === 1) {
-          setData([...newItems]);
-        } else {
-          setData((prev) => [...prev, ...newItems]);
-        }
+        if (!controller.signal.aborted) {
+          if (page === 1) {
+            setData([...newItems]);
+          } else {
+            setData((prev) => [...prev, ...newItems]);
+          }
 
-        if (newItems.length < 20) {
-          setHasMore(false);
+          if (newItems.length < 20) {
+            setHasMore(false);
+          }
         }
       })
       .catch((error) => {
@@ -61,15 +67,23 @@ const useFetchSearchData = (queries) => {
         }
       })
       .finally(() => {
-        setIsLoading(false);
+        if (!controller.signal.aborted) {
+          setIsLoading(false);
+        }
       });
+
+    return () => {
+      controller.abort();
+    };
   }, [queries.type, queries.query, page]);
 
   return {
     data,
+    setData,
     isLoading,
     error,
     hasMore,
+    hasFetched,
     loadMore,
   };
 };
