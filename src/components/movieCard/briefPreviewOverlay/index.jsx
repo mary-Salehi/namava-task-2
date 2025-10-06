@@ -8,6 +8,37 @@ import { useStyles } from "./styles";
 function BriefPreview({ briefPreview, isHovered, movie }) {
   const classes = useStyles({ isHovered });
 
+  const showAudioTrack = (briefPreview) => {
+  if (!briefPreview.hasPersianSubtitle && briefPreview.dubsType === "None") {
+    return null;
+  }
+
+  if (briefPreview.dubsType !== "None") {
+    const dubText = briefPreview.dubsType === "ExclusiveDubs" 
+      ? "دوبله نماوا" 
+      : "دوبله اختصاصی";
+    
+    return (
+      <div className={classes.flexRow}>
+        <MicIcon className={classes.icon} />
+        {dubText}
+      </div>
+    );
+  }
+
+
+  if (briefPreview.hasPersianSubtitle) {
+    return (
+      <div className={classes.flexRow}>
+        <SubtitleIcon className={classes.icon} />
+        <span>زیرنویس</span>
+      </div>
+    );
+  }
+
+  return null;
+};
+
   return (
     <div className={classes.overlay}>
       <div className={classes.info}>
@@ -30,24 +61,7 @@ function BriefPreview({ briefPreview, isHovered, movie }) {
           </div>
         )}
 
-        {(briefPreview.hasPersianSubtitle ||
-          briefPreview.dubsType !== "None") && (
-          <div className={classes.flexRow}>
-            {briefPreview.dubsType !== "None" ? (
-              <div className={classes.flexRow}>
-                <MicIcon className={classes.icon} />
-                {briefPreview.dubsType === "ExclusiveDubs"
-                  ? "دوبله نماوا"
-                  : "دوبله اختصاصی"}
-              </div>
-            ) : briefPreview.dubsType == "None" ? (
-              <div className={classes.flexRow}>
-                <SubtitleIcon className={classes.icon} />
-                <span>زیرنویس</span>
-              </div>
-            ) : null}
-          </div>
-        )}
+        {showAudioTrack(briefPreview)}
       </div>
     </div>
   );
